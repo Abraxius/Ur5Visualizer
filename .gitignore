@@ -1,0 +1,53 @@
+# Byte-compiled Dateien
+*.pyc
+*.pyo
+__pycache__/
+
+# Logdateien und Debug-Dumps
+*.log
+*.out
+*.err
+*.pid
+*.swp
+*.swo
+
+# Virtuelle Umgebungen
+venv/
+.env/
+
+# System-Dateien
+.DS_Store
+Thumbs.db
+
+# IDE-spezifische Dateien
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# Python Package Manager Cache
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# PyInstaller Artefakte
+*.spec
+
+# Flask spezifisch
+instance/
+*.sqlite3
+
+# PyGame Screenshots (optional, falls du Screenshots speicherst)
+*.png
+*.jpg
+*.jpeg
+
+# Anforderungen-Dateien, wenn sie automatisch generiert werden
+Pipfile.lock
+poetry.lock
+requirements.txt~
+
+# Sonstige
+.envrc
+*.bak
