@@ -1,9 +1,8 @@
-﻿# visualizer.py
-import pygame
+﻿import pygame
 
 # Farben
-transparent_color = (255, 255, 255)  
-circle_color = (255, 0, 0)        # Roter Kreis
+transparent_color = (255, 255, 255)
+circle_color = (255, 0, 0)  # Roter Kreis
 
 class Visualizer:
     def __init__(self, width=800, height=600):
@@ -14,11 +13,13 @@ class Visualizer:
         self.running = True
 
     def draw_circle(self, x, y):
-        self.screen.fill(transparent_color)  
+        """Zeichnet den Kreis an den angegebenen Koordinaten."""
+        self.screen.fill(transparent_color)
         pygame.draw.circle(self.screen, circle_color, (x, y), 20)  # Roter Kreis
         pygame.display.flip()
 
     def run(self, get_coordinates):
+        """Startet die Visualisierungsschleife."""
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

@@ -1,6 +1,4 @@
-﻿# main.py
-import requests
-
+﻿import requests
 from visualizer import Visualizer
 
 # Dummy-Datenquelle (Bewegung in X-Richtung)
@@ -12,9 +10,15 @@ def dummy_coordinates():
     return x, y
 
 def fetch_coordinates():
-    response = requests.get("http://127.0.0.1:5000/coordinates")
-    data = response.json()
-    return data["x"], data["y"]
+    """Koordinaten vom Server abrufen."""
+    try:
+        response = requests.get("http://127.0.0.1:8000/status")
+        response.raise_for_status()
+        data = response.json()
+        return data.get("x", 0), data.get("y", 0)
+    except requests.RequestException as e:
+        print(f"Fehler beim Abrufen der Koordinaten: {e}")
+        return 0, 0
 
 if __name__ == "__main__":
     visualizer = Visualizer()

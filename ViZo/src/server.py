@@ -1,20 +1,28 @@
-﻿# server.py
-from flask import Flask, request, jsonify
+﻿from fastapi import FastAPI
+from pydantic import BaseModel
+from typing import Union
 
-app = Flask(__name__)
-coordinates = {"x": 400, "y": 300}  # Initialkoordinaten
+app = FastAPI()
+print("Server läuft...")
 
-@app.route("/update", methods=["POST"]) #überschreibt die aktuellen koordinaten mit den neuen
-def update_coordinates():
-    global coordinates
-    data = request.get_json()
-    coordinates["x"] = data.get("x", coordinates["x"])
-    coordinates["y"] = data.get("y", coordinates["y"])
-    return jsonify({"status": "success"})
+class Coordinates(BaseModel):
+    x: int
+    y: int
 
-@app.route("/coordinates", methods=["GET"])
+# Initiale Koordinaten
+current_coordinates = {"x": 200, "y": 200}
+
+@app.post("/update")
+def update_coordinates(coords: Coordinates):
+    global current_coordinates
+    current_coordinates["x"] = coords.x
+    current_coordinates["y"] = coords.y
+    return {"message": "Koordinaten aktualisiert"}
+
+@app.get("/")
+def hello_world():
+    return {'message': 'Hello World!'};
+
+@app.get("/status")
 def get_coordinates():
-    return jsonify(coordinates)
-
-if __name__ == "__main__":
-    app.run(debug=True)
+    return current_coordinates
