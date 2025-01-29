@@ -21,12 +21,26 @@ import {
 // You can use a Zod schema here if you want.
 export type Payment = {
     id: string
-    amount: number
-    status: "pending" | "processing" | "success" | "failed"
-    email: string
+    amount: number //visible
+    status: "pending" | "processing" | "success" | "failed" //color
+    email: string //type
 }
 
-export const columns: ColumnDef<Payment>[] = [
+// You can use a Zod schema here if you want.
+export type VisualObject = {
+    id: string
+    name: string
+    type: string  
+    x: number
+    y: number
+    color: string
+    scale_x: number
+    scale_y: number
+    visible: boolean
+}
+
+
+export const columns: ColumnDef<VisualObject>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -48,26 +62,50 @@ export const columns: ColumnDef<Payment>[] = [
         ),
     },
     {
-        accessorKey: "status",
-        header: "Status",
+        accessorKey: "id",
+        header: "ID",
     },
     {
-        accessorKey: "email",
+        accessorKey: "name",
         header: ({ column }) => {
             return (
                 <Button
                     variant="ghost"
                     onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
                 >
-                    Email
+                    Name
                     <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             )
         },
     },
     {
-        accessorKey: "amount",
-        header: "Amount",
+        accessorKey: "position",
+        header: "Position",
+        cell: ({ row }) => {
+            // Kombiniere x und y zu einem String
+            const x = row.original.x
+            const y = row.original.y
+            return `${x} x ${y}`; 
+          },
+    },
+    {
+        accessorKey: "size",
+        header: "Größe",
+        cell: ({ row }) => {
+            // Kombiniere x und y zu einem String
+            const x = row.original.scale_x
+            const y = row.original.scale_y
+            return `${x} x ${y}`; 
+          },
+    },
+    {
+        accessorKey: "type",
+        header: "Form",
+    },
+    {
+        accessorKey: "visible",
+        header: "Visible",
     },
     {
         id: "actions",

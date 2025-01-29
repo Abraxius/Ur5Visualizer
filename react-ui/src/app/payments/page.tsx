@@ -2,10 +2,15 @@
 
 import { Payment, columns } from "./columns"
 import { DataTable } from "./data-table"
+import { VisualObject } from './columns'
+import { getObjectsTest } from "@/lib/api"
 
-async function getData(): Promise<Payment[]> {
+async function getData(): Promise<VisualObject[]> {
     // Fetch data from your API here.
-    return [
+
+    const data = await getObjectsTest()
+    return data
+    /*return [
         {
             id: "728ed52f",
             amount: 100,
@@ -37,7 +42,7 @@ async function getData(): Promise<Payment[]> {
             email: "ds@example.com",
         },
         // ...
-    ]
+    ]*/
 }
 
 export default async function DemoPage() {
