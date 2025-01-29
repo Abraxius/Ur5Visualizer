@@ -1,4 +1,5 @@
 ﻿import pygame
+import requests
 
 # Farben
 transparent_color = (255, 255, 255)
@@ -12,13 +13,19 @@ class Visualizer:
         self.clock = pygame.time.Clock()
         self.running = True
 
-    def draw_circle(self, x, y):
-        """Zeichnet den Kreis an den angegebenen Koordinaten."""
-        self.screen.fill(transparent_color)
-        pygame.draw.circle(self.screen, circle_color, (x, y), 20)  # Roter Kreis
-        pygame.display.flip()
+    def draw(self, objects):
+        """Zeichnet alle sichtbaren Objekte."""
+        self.screen.fill((0, 0, 0))  # Hintergrund schwarz
 
-    def run(self, get_coordinates):
+        for obj in objects:
+            if obj["type"] == "circle":
+                pygame.draw.circle(self.screen, obj["color"], (obj["x"], obj["y"]), 20)
+            elif obj["type"] == "rectangle":
+                pygame.draw.rect(self.screen, obj["color"], (obj["x"], obj["y"], 40, 40))
+    
+        pygame.display.flip()
+    
+    def run(self, connection):
         """Startet die Visualisierungsschleife."""
         while self.running:
             for event in pygame.event.get():
@@ -26,8 +33,8 @@ class Visualizer:
                     self.running = False
 
             # Koordinaten abrufen und Kreis zeichnen
-            x, y = get_coordinates()
-            self.draw_circle(x, y)
+            objects = connection.fetch_objects(self)
+            self.draw(objects)
             self.clock.tick(60)  # 60 FPS
 
         pygame.quit()
