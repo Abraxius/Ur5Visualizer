@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizer Config</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<h1>Visualizer Configuration</h1>
+
+<!-- Formular zum Hinzufügen eines neuen Objekts -->
+<h2>Add Object</h2>
+<form id="add-object-form">
+    <label for="shape">Shape:</label>
+    <select id="shape" name="shape">
+        <option value="circle">Circle</option>
+        <option value="rectangle">Rectangle</option>
+        <option value="triangle">Triangle</option>
+    </select>
+    <br><br>
+    <label for="color">Color:</label>
+    <input type="text" id="color" name="color" value="red" placeholder="e.g., red, blue">
+    <br><br>
+    <label for="x">X Position:</label>
+    <input type="number" id="x" name="x" required>
+    <br><br>
+    <label for="y">Y Position:</label>
+    <input type="number" id="y" name="y" required>
+    <br><br>
+    <button type="submit">Add Object</button>
+</form>
+
+<!-- Liste der Objekte -->
+<h2>Current Objects</h2>
+<ul id="object-list"></ul>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
