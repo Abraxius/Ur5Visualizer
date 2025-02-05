@@ -22,6 +22,7 @@ class VisualObject(BaseModel):
     color: str
     scale_x: int
     scale_y: int
+    border_width: int
     visible: bool
     
 #Formen-Speicher (vorerst in-memory)
@@ -43,6 +44,7 @@ def dict(self):
         "color": self.color,
         "scale_x": self.scale_x,
         "scale_y": self.scale_y,
+        "border_width": self.border_width,
         "visible": self.visible
     }
 
@@ -59,6 +61,7 @@ def from_dict(cls, data):
             color=data["color"],
             scale_x=data["scale_x"],
             scale_y=data["scale_y"],
+            border_width=data["border_width"],
             visible=data["visible"]
         )
     except KeyError as e:
@@ -93,17 +96,15 @@ if not objects:
     print("Es werden standard Objekte erzeugt.")
     
     objects = [
-        VisualObject(id="1", name="leander", type="circle", x=200, y=200, color="blue", scale_x=20, scale_y=20, visible=True),
-        VisualObject(id="2", name="hannah", type="circle", x=100, y=100, color="red", scale_x=20, scale_y=20, visible=True),
-        VisualObject(id="3", name="alex", type="circle", x=300, y=300, color="green", scale_x=20, scale_y=20, visible=True)
+        VisualObject(id="1", name="leander", type="circle", x=200, y=200, color="blue", scale_x=20, scale_y=20, border_width=5, visible=True),
+        VisualObject(id="2", name="hannah", type="circle", x=100, y=100, color="red", scale_x=20, scale_y=20, border_width=5, visible=True),
+        VisualObject(id="3", name="alex", type="rectangle", x=300, y=300, color="green", scale_x=100, scale_y=50, border_width=5, visible=True)
     ]
 
     save_objects(objects)
-    
-#ToDo: Scale_x und Scale_y haben keine auswirkung muss noch implementiert werden
 
 @app.post("/update/{object_id}")
-def update_coordinates(object_id: int, coords: VisualObject):
+def update_object(object_id: int, coords: VisualObject):
     for obj in objects:
         if obj.id == object_id:
             print(f"Updating object {obj.id}: {coords}")
@@ -111,8 +112,22 @@ def update_coordinates(object_id: int, coords: VisualObject):
             obj.name = coords.name
             obj.x = coords.x
             obj.y = coords.y
+            obj.scale_x = coords.scale_x
+            obj.scale_y = coords.scale_y
+            obj.border_width = coords.border_width
             obj.color = coords.color
             obj.visible = coords.visible
+            print(f"Updated object {obj.id}: {obj}")
+
+    save_objects(objects)
+    return {"message": "Objekt aktualisiert"}
+
+@app.post("/update_coordinate/{object_id}")
+def update_coordinates(object_id: int, coords: VisualObject):
+    for obj in objects:
+        if obj.id == object_id:
+            obj.x = coords.x
+            obj.y = coords.y
             print(f"Updated object {obj.id}: {obj}")
 
     save_objects(objects)
@@ -143,7 +158,7 @@ def get_objects():
 def create_object(obj: VisualObject):
     """Ein neues Objekt erstellen."""
     new_id = len(objects) + 1  # Automatische ID-Zuweisung
-    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, visible=obj.visible)
+    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, border_width=obj.border_width, visible=obj.visible)
     objects.append(new_object)
     save_objects(objects)
     return {"message": "Objekt hinzugefügt", "object": new_object}

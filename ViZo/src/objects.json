@@ -3,33 +3,36 @@
         "id": 1,
         "name": "leander",
         "type": "circle",
-        "x": 400,
+        "x": 200,
         "y": 200,
         "color": "blue",
         "scale_x": 20,
         "scale_y": 20,
+        "border_width": 5,
         "visible": true
     },
     {
         "id": 2,
         "name": "hannah",
         "type": "circle",
-        "x": 200,
+        "x": 100,
         "y": 100,
         "color": "red",
         "scale_x": 20,
         "scale_y": 20,
+        "border_width": 5,
         "visible": true
     },
     {
         "id": 3,
         "name": "alex",
-        "type": "circle",
-        "x": 300,
-        "y": 660,
+        "type": "rectangle",
+        "x": 400,
+        "y": 50,
         "color": "green",
-        "scale_x": 20,
-        "scale_y": 20,
+        "scale_x": 100,
+        "scale_y": 50,
+        "border_width": 5,
         "visible": true
     }
 ]

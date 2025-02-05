@@ -36,6 +36,7 @@ export type VisualObject = {
     color: string
     scale_x: number
     scale_y: number
+    border_width: number
     visible: boolean
 }
 
@@ -98,6 +99,10 @@ export const columns: ColumnDef<VisualObject>[] = [
             const y = row.original.scale_y
             return `${x} x ${y}`; 
           },
+    },
+    {
+        accessorKey: "border_width",
+        header: "Umrandung",
     },
     {
         accessorKey: "type",

@@ -15,13 +15,13 @@ class Visualizer:
 
     def draw(self, objects):
         """Zeichnet alle sichtbaren Objekte."""
-        self.screen.fill((0, 0, 0))  # Hintergrund schwarz
+        self.screen.fill((255, 255, 255))  # Hintergrund schwarz
 
         for obj in objects:
             if obj["type"] == "circle":
-                pygame.draw.circle(self.screen, obj["color"], (obj["x"], obj["y"]), 20)
+                pygame.draw.circle(self.screen, obj["color"], (obj["x"], obj["y"]), obj["scale_x"], obj["border_width"])
             elif obj["type"] == "rectangle":
-                pygame.draw.rect(self.screen, obj["color"], (obj["x"], obj["y"], 40, 40))
+                pygame.draw.rect(self.screen, obj["color"], (obj["x"], obj["y"], obj["scale_x"], obj["scale_y"]), obj["border_width"])
     
         pygame.display.flip()
     
