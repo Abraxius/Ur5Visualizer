@@ -6,9 +6,20 @@ transparent_color = (255, 255, 255)
 circle_color = (255, 0, 0)  # Roter Kreis
 
 class Visualizer:
-    def __init__(self, width=800, height=600):
+    def __init__(self, width=800, height=600, fullScreen=False):
         pygame.init()
-        self.screen = pygame.display.set_mode((width, height))
+
+        # Bildschirmgröße automatisch abrufen
+        screen_info = pygame.display.Info()
+        screen_width, screen_height = screen_info.current_w, screen_info.current_h
+
+        if fullScreen:
+            flags = pygame.NOFRAME  # Borderless-Fenster (rahmenlos, füllt ganzen Bildschirm)
+            self.screen = pygame.display.set_mode((screen_width, screen_height), flags)
+        else:
+            self.screen = pygame.display.set_mode((width, height))
+            
+        #self.screen = pygame.display.set_mode((width, height), pygame.FULLSCREEN)
         pygame.display.set_caption("Roboter-Visualisierung")
         self.clock = pygame.time.Clock()
         self.running = True
