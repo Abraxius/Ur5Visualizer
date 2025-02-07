@@ -6,7 +6,7 @@ transparent_color = (255, 255, 255)
 circle_color = (255, 0, 0)  # Roter Kreis
 
 class Visualizer:
-    def __init__(self, width=800, height=600, fullScreen=False):
+    def __init__(self, width=1000, height=600, fullScreen=False):
         pygame.init()
 
         # Bildschirmgröße automatisch abrufen

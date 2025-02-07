@@ -25,6 +25,6 @@ class Connector:
 
 
 if __name__ == "__main__":
-    visualizer = Visualizer(fullScreen=False)
+    visualizer = Visualizer(fullScreen=True)
     visualizer.run(Connector)
     

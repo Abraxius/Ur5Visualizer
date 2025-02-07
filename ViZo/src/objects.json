@@ -1,13 +1,13 @@
 [
     {
         "id": 1,
-        "name": "leander",
+        "name": "name",
         "type": "circle",
-        "x": 200,
+        "x": 500,
         "y": 200,
         "color": "blue",
-        "scale_x": 20,
-        "scale_y": 20,
+        "scale_x": 120,
+        "scale_y": 200,
         "border_width": 5,
         "visible": true
     },
@@ -15,8 +15,8 @@
         "id": 2,
         "name": "hannah",
         "type": "circle",
-        "x": 100,
-        "y": 100,
+        "x": 500,
+        "y": 300,
         "color": "red",
         "scale_x": 20,
         "scale_y": 20,
@@ -25,14 +25,26 @@
     },
     {
         "id": 3,
-        "name": "alex",
+        "name": "name",
+        "type": "circle",
+        "x": 900,
+        "y": 200,
+        "color": "yellow",
+        "scale_x": 100,
+        "scale_y": 120,
+        "border_width": 20,
+        "visible": true
+    },
+    {
+        "id": 4,
+        "name": "name",
         "type": "rectangle",
-        "x": 400,
-        "y": 50,
+        "x": 700,
+        "y": 100,
         "color": "green",
         "scale_x": 100,
-        "scale_y": 50,
-        "border_width": 5,
+        "scale_y": 100,
+        "border_width": 20,
         "visible": true
     }
 ]

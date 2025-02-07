@@ -154,6 +154,8 @@ def get_objects():
     """Alle gespeicherten Objekte abrufen."""
     return objects
 
+#crud interface
+
 @app.post("/objects")
 def create_object(obj: VisualObject):
     """Ein neues Objekt erstellen."""
