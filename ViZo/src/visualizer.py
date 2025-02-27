@@ -29,13 +29,20 @@ class Visualizer:
         self.clock = pygame.time.Clock()
         self.running = True
 
+    def draw_crosshair(self, screen, color, center_x, center_y, size=20, border_with=2):
+        horizontal_line = [(center_x - size/2, center_y), (center_x + size/2, center_y)]
+        vertical_line = [(center_x, center_y - size/2), (center_x, center_y + size/2)]
+        
+        pygame.draw.lines(screen, color, False, horizontal_line, border_with)
+        pygame.draw.lines(screen, color, False, vertical_line, border_with)
+        
     def draw(self, objects):
         """Zeichnet alle sichtbaren Objekte."""
         self.screen.fill((255, 255, 255))  # Hintergrund schwarz
 
         for obj in objects:
             if obj["type"] == "circle":
-                pygame.draw.circle(self.screen, obj["color"], ((obj["x"]-obj["scale_x"]), (obj["y"]-obj["scale_x"])), obj["scale_x"], obj["border_width"])
+                pygame.draw.circle(self.screen, obj["color"], ((obj["x"]), (obj["y"])), obj["scale_x"]/2, obj["border_width"])
             elif obj["type"] == "rectangle":
                 pygame.draw.rect(self.screen, obj["color"], ((obj["x"] - obj["scale_x"]/2), (obj["y"] - obj["scale_y"]/2), obj["scale_x"], obj["scale_y"]), obj["border_width"])
             elif obj["type"] == "lines":
@@ -44,6 +51,9 @@ class Visualizer:
                 text_surface = self.font.render(obj["text"], True, obj["color"])
                 text_rect = text_surface.get_rect(center=(obj["x"], obj["y"]))
                 self.screen.blit(text_surface, text_rect)
+            elif obj["type"] == "crosshair":
+                self.draw_crosshair(self.screen, obj["color"], obj["x"], obj["y"], obj["scale_x"], obj["border_width"])
+                
     
         pygame.display.flip()
     

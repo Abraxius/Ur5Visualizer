@@ -2,12 +2,12 @@
     {
         "id": 1,
         "name": "Alex",
-        "type": "text",
+        "type": "circle",
         "x": 100,
         "y": 100,
-        "color": "green",
+        "color": "blue",
         "scale_x": 100,
-        "scale_y": 200,
+        "scale_y": 100,
         "border_width": 5,
         "visible": true,
         "lines_points": [
@@ -20,6 +20,6 @@
                 1
             ]
         ],
-        "text": "Toller Text"
+        "text": ""
     }
 ]
