@@ -35,14 +35,15 @@ class Visualizer:
 
         for obj in objects:
             if obj["type"] == "circle":
-                pygame.draw.circle(self.screen, obj["color"], (obj["x"], obj["y"]), obj["scale_x"], obj["border_width"])
+                pygame.draw.circle(self.screen, obj["color"], ((obj["x"]-obj["scale_x"]), (obj["y"]-obj["scale_x"])), obj["scale_x"], obj["border_width"])
             elif obj["type"] == "rectangle":
-                pygame.draw.rect(self.screen, obj["color"], (obj["x"], obj["y"], obj["scale_x"], obj["scale_y"]), obj["border_width"])
+                pygame.draw.rect(self.screen, obj["color"], ((obj["x"] - obj["scale_x"]/2), (obj["y"] - obj["scale_y"]/2), obj["scale_x"], obj["scale_y"]), obj["border_width"])
             elif obj["type"] == "lines":
                 pygame.draw.lines(self.screen, obj["color"], False, obj["lines_points"], obj["border_width"])
             elif obj["type"] == "text":
                 text_surface = self.font.render(obj["text"], True, obj["color"])
-                self.screen.blit(text_surface, (obj["x"], obj["y"]))
+                text_rect = text_surface.get_rect(center=(obj["x"], obj["y"]))
+                self.screen.blit(text_surface, text_rect)
     
         pygame.display.flip()
     

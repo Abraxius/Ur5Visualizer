@@ -124,6 +124,7 @@ def update_object(object_id: int, coords: VisualObject):
             obj.color = coords.color
             obj.visible = coords.visible
             obj.lines_points = coords.lines_points
+            obj.text = coords.text
             print(f"Updated object {obj.id}: {obj}")
 
     save_objects(objects)
