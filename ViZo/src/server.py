@@ -24,6 +24,7 @@ class VisualObject(BaseModel):
     scale_y: int
     border_width: int
     visible: bool
+    lines_points: List[tuple[int, int]]
     
 #Formen-Speicher (vorerst in-memory)
 #objects = [
@@ -45,7 +46,8 @@ def dict(self):
         "scale_x": self.scale_x,
         "scale_y": self.scale_y,
         "border_width": self.border_width,
-        "visible": self.visible
+        "visible": self.visible,
+        "lines_points": self.lines_points
     }
 
 @classmethod
@@ -62,7 +64,8 @@ def from_dict(cls, data):
             scale_x=data["scale_x"],
             scale_y=data["scale_y"],
             border_width=data["border_width"],
-            visible=data["visible"]
+            visible=data["visible"],
+            lines_points=data["lines_points"]
         )
     except KeyError as e:
         print(f"Fehlender Key: {e}")
@@ -95,11 +98,11 @@ objects = load_objects()
 if not objects:
     print("Es werden standard Objekte erzeugt.")
     
-    objects = [
-        VisualObject(id="1", name="leander", type="circle", x=200, y=200, color="blue", scale_x=20, scale_y=20, border_width=5, visible=True),
-        VisualObject(id="2", name="hannah", type="circle", x=100, y=100, color="red", scale_x=20, scale_y=20, border_width=5, visible=True),
-        VisualObject(id="3", name="alex", type="rectangle", x=300, y=300, color="green", scale_x=100, scale_y=50, border_width=5, visible=True)
-    ]
+    #objects = [
+    #    VisualObject(id="1", name="leander", type="circle", x=200, y=200, color="blue", scale_x=20, scale_y=20, border_width=5, visible=True),
+    #    VisualObject(id="2", name="hannah", type="circle", x=100, y=100, color="red", scale_x=20, scale_y=20, border_width=5, visible=True),
+    #    VisualObject(id="3", name="alex", type="rectangle", x=300, y=300, color="green", scale_x=100, scale_y=50, border_width=5, visible=True)
+    #]
 
     save_objects(objects)
 
@@ -117,6 +120,7 @@ def update_object(object_id: int, coords: VisualObject):
             obj.border_width = coords.border_width
             obj.color = coords.color
             obj.visible = coords.visible
+            obj.lines_points = coords.lines_points
             print(f"Updated object {obj.id}: {obj}")
 
     save_objects(objects)
@@ -160,7 +164,7 @@ def get_objects():
 def create_object(obj: VisualObject):
     """Ein neues Objekt erstellen."""
     new_id = len(objects) + 1  # Automatische ID-Zuweisung
-    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, border_width=obj.border_width, visible=obj.visible)
+    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, border_width=obj.border_width, visible=obj.visible, lines_points=obj.lines_points)
     objects.append(new_object)
     save_objects(objects)
     return {"message": "Objekt hinzugefügt", "object": new_object}

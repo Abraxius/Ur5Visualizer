@@ -33,6 +33,8 @@ class Visualizer:
                 pygame.draw.circle(self.screen, obj["color"], (obj["x"], obj["y"]), obj["scale_x"], obj["border_width"])
             elif obj["type"] == "rectangle":
                 pygame.draw.rect(self.screen, obj["color"], (obj["x"], obj["y"], obj["scale_x"], obj["scale_y"]), obj["border_width"])
+            elif obj["type"] == "lines":
+                pygame.draw.lines(self.screen, obj["color"], False, obj["lines_points"], obj["border_width"])
     
         pygame.display.flip()
     
