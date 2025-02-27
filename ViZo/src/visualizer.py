@@ -5,10 +5,15 @@ import requests
 transparent_color = (255, 255, 255)
 circle_color = (255, 0, 0)  # Roter Kreis
 
+
+
 class Visualizer:
     def __init__(self, width=1000, height=600, fullScreen=False):
         pygame.init()
 
+        #Standard-Schriftart mit Größe 36
+        self.font = pygame.font.Font(None, 36)
+        
         # Bildschirmgröße automatisch abrufen
         screen_info = pygame.display.Info()
         screen_width, screen_height = screen_info.current_w, screen_info.current_h
@@ -35,6 +40,9 @@ class Visualizer:
                 pygame.draw.rect(self.screen, obj["color"], (obj["x"], obj["y"], obj["scale_x"], obj["scale_y"]), obj["border_width"])
             elif obj["type"] == "lines":
                 pygame.draw.lines(self.screen, obj["color"], False, obj["lines_points"], obj["border_width"])
+            elif obj["type"] == "text":
+                text_surface = self.font.render(obj["text"], True, obj["color"])
+                self.screen.blit(text_surface, (obj["x"], obj["y"]))
     
         pygame.display.flip()
     

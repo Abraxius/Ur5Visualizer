@@ -4,7 +4,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from typing import Union
-from typing import List
+from typing import List, Tuple, Optional
 import asyncio
 import random
 import json
@@ -15,16 +15,17 @@ print("Server läuft...")
 # Datenmodell für Objekte
 class VisualObject(BaseModel):
     id: int
-    name: str
-    type: str  # z.B. "circle" oder "rectangle"
-    x: int
-    y: int
-    color: str
-    scale_x: int
-    scale_y: int
-    border_width: int
+    name: str = "Alex"
+    type: str = "circle" # z.B. "circle" oder "rectangle"
+    x: int = 100
+    y: int = 100
+    color: str = "blue"
+    scale_x: int = "20"
+    scale_y: int = "20"
+    border_width: int = "5"
     visible: bool
-    lines_points: List[tuple[int, int]]
+    lines_points: List[Tuple[int, int]] = [[0, 0], [1, 1]]
+    text: Optional[str] = ""
     
 #Formen-Speicher (vorerst in-memory)
 #objects = [
@@ -47,7 +48,8 @@ def dict(self):
         "scale_y": self.scale_y,
         "border_width": self.border_width,
         "visible": self.visible,
-        "lines_points": self.lines_points
+        "lines_points": self.lines_points,
+        "text": self.text
     }
 
 @classmethod
@@ -65,7 +67,8 @@ def from_dict(cls, data):
             scale_y=data["scale_y"],
             border_width=data["border_width"],
             visible=data["visible"],
-            lines_points=data["lines_points"]
+            lines_points=data["lines_points"],
+            text=data["text"]
         )
     except KeyError as e:
         print(f"Fehlender Key: {e}")
@@ -164,7 +167,7 @@ def get_objects():
 def create_object(obj: VisualObject):
     """Ein neues Objekt erstellen."""
     new_id = len(objects) + 1  # Automatische ID-Zuweisung
-    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, border_width=obj.border_width, visible=obj.visible, lines_points=obj.lines_points)
+    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, border_width=obj.border_width, visible=obj.visible, lines_points=obj.lines_points, text=obj.text)
     objects.append(new_object)
     save_objects(objects)
     return {"message": "Objekt hinzugefügt", "object": new_object}

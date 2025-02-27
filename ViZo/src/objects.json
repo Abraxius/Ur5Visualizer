@@ -1,0 +1,181 @@
+[
+    {
+        "id": 1,
+        "name": "Karl",
+        "type": "text",
+        "x": 200,
+        "y": 200,
+        "color": "black",
+        "scale_x": 0,
+        "scale_y": 0,
+        "border_width": 0,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                1
+            ]
+        ],
+        "text": "Penis"
+    },
+    {
+        "id": 2,
+        "name": "Karl",
+        "type": "text",
+        "x": 200,
+        "y": 200,
+        "color": "black",
+        "scale_x": 0,
+        "scale_y": 0,
+        "border_width": 0,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                1
+            ]
+        ],
+        "text": "Penis"
+    },
+    {
+        "id": 3,
+        "name": "Karl",
+        "type": "text",
+        "x": 200,
+        "y": 200,
+        "color": "black",
+        "scale_x": 0,
+        "scale_y": 0,
+        "border_width": 0,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                1
+            ]
+        ],
+        "text": "Penis"
+    },
+    {
+        "id": 4,
+        "name": "Karl",
+        "type": "text",
+        "x": 200,
+        "y": 200,
+        "color": "black",
+        "scale_x": 0,
+        "scale_y": 0,
+        "border_width": 0,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                1
+            ]
+        ],
+        "text": "Penis"
+    },
+    {
+        "id": 5,
+        "name": "Karl",
+        "type": "text",
+        "x": 200,
+        "y": 200,
+        "color": "black",
+        "scale_x": 0,
+        "scale_y": 0,
+        "border_width": 0,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                1
+            ]
+        ],
+        "text": "Penis"
+    },
+    {
+        "id": 6,
+        "name": "Karl",
+        "type": "text",
+        "x": 200,
+        "y": 200,
+        "color": "black",
+        "scale_x": 0,
+        "scale_y": 0,
+        "border_width": 0,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                1
+            ]
+        ],
+        "text": "Penis"
+    },
+    {
+        "id": 7,
+        "name": "Karl",
+        "type": "text",
+        "x": 200,
+        "y": 200,
+        "color": "black",
+        "scale_x": 0,
+        "scale_y": 0,
+        "border_width": 0,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                1
+            ]
+        ],
+        "text": "Penis"
+    },
+    {
+        "id": 8,
+        "name": "Alex",
+        "type": "circle",
+        "x": 100,
+        "y": 100,
+        "color": "blue",
+        "scale_x": 20,
+        "scale_y": 20,
+        "border_width": 5,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                0
+            ],
+            [
+                1,
+                1
+            ]
+        ],
+        "text": ""
+    },
+    {
+        "id": 9,
+        "name": "Alex",
+        "type": "circle",
+        "x": 100,
+        "y": 100,
+        "color": "blue",
+        "scale_x": 20,
+        "scale_y": 20,
+        "border_width": 5,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                0
+            ],
+            [
+                1,
+                1
+            ]
+        ],
+        "text": ""
+    }
+]
