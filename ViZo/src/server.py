@@ -26,6 +26,10 @@ class VisualObject(BaseModel):
     visible: bool
     lines_points: List[Tuple[int, int]] = [[0, 0], [1, 1]]
     text: Optional[str] = ""
+
+class Sounds(BaseModel):
+    id: int
+    name: str = "Twin.mp3"
     
 #Formen-Speicher (vorerst in-memory)
 #objects = [
@@ -33,6 +37,9 @@ class VisualObject(BaseModel):
 #    VisualObject(id="2-red", type="circle", x=100, y=100, color="red", scale_x=20, scale_y=20, visible=True),
 #    VisualObject(id="3-green", type="circle", x=300, y=300, color="green", scale_x=20, scale_y=20, visible=True)
 #]
+
+#Sound-Speicher
+sounds = []
 
 # Lade die Objekte aus einer JSON-Datei
 def dict(self):
@@ -172,3 +179,31 @@ def create_object(obj: VisualObject):
     objects.append(new_object)
     save_objects(objects)
     return {"message": "Objekt hinzugefügt", "object": new_object}
+
+@app.post("/sounds")
+def create_sound(sound: Sounds):
+    """Einen im Ordner abgelegten Sound abspielen. Dafür wird der Sound hinzugefügt."""
+    new_id = len(sounds) + 1  # Automatische ID-Zuweisung
+    new_sound = Sounds(id=new_id, name=sound.name)
+    sounds.append(new_sound)
+    return {"message": "Spiele Sound ab", "object": new_sound}
+
+@app.get("/sounds", response_model=List[Sounds])
+def get_sound():
+    """Einen im Ordner abgelegten Sound abspielen. Dafür werden die Sounds geladen."""
+    return sounds
+
+@app.delete("/sounds")
+def delete_sound():
+    sounds.clear()
+    return {"message": "Alle Sounds gelöscht"}
+
+# ToDo: Funktioniert noch nicht richtig, ist aktuell allerdings auch unnötig, deshalb auskommentiert
+#@app.delete("/sounds/{sound_name}")
+#def delete_sound(sound_name: str):
+#    """Hier werden die Sounds aus der Liste gelöscht, damit sie nicht endlos abspielen."""
+#    for snd in sounds:
+#        if snd.name == sound_name:
+#            sounds.remove(sound_name)
+#            return {"message": "Der Sound wurde gelöscht"}
+#    return {"message": "Der Sound wurde nicht gefunden"}

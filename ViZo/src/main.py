@@ -15,13 +15,36 @@ class Connector:
             print(f"Fehler beim Abrufen der Koordinaten: {e}")
             return 0, 0
 
-    # Dummy-Datenquelle (Bewegung in X-Richtung)
-    def dummy_coordinates(self):
-        import time
-        t = time.time()  # Aktuelle Zeit
-        x = int(400 + 100 * (t % 10))  # X-Koordinate bewegt sich sinusförmig
-        y = 300  # Y-Koordinate bleibt konstant
-        return x, y
+    def fetch_audio(self):
+        try:
+            response = requests.get("http://127.0.0.1:8000/sounds")
+            response.raise_for_status()
+            sounds = response.json()
+            return sounds
+        except requests.RequestException as e:
+            print(f"Fehler beim Abrufen der Soundnamen: {e}")
+            return 0
+
+    #ToDo: Diese Klasse funktioniert noch nicht richtig, aktuell allerdings auch unnötig und deshalb auf später verschoben
+    #def delete_sound(self, sound_name: str):
+    #    """Sendet einen DELETE-Request, um den Sound zu entfernen."""
+    #    try:
+    #        response = requests.delete(f"http://127.0.0.1:8000/sounds/{sound_name}")
+    #        if response.status_code == 200:
+    #            print(f"Sound {sound_name} wurde gelöscht.")
+    #        return response.json()
+    #   except requests.RequestException as e:
+    #        print(f"Fehler beim Löschen des Sounds: {e}")
+    #        return None
+
+    def delete_sounds(self):
+        """Sendet einen DELETE-Request, um den Sound zu entfernen."""
+        try:
+            response = requests.delete(f"http://127.0.0.1:8000/sounds")
+            return response.json()
+        except requests.RequestException as e:
+            print(f"Fehler beim Löschen des Sounds: {e}")
+            return None
 
 
 if __name__ == "__main__":

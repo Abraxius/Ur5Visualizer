@@ -5,12 +5,11 @@ import requests
 transparent_color = (255, 255, 255)
 circle_color = (255, 0, 0)  # Roter Kreis
 
-
-
 class Visualizer:
     def __init__(self, width=1000, height=600, fullScreen=False):
         pygame.init()
-
+        pygame.mixer.init()
+        
         #Standard-Schriftart mit Größe 36
         self.font = pygame.font.Font(None, 36)
         
@@ -35,7 +34,18 @@ class Visualizer:
         
         pygame.draw.lines(screen, color, False, horizontal_line, border_with)
         pygame.draw.lines(screen, color, False, vertical_line, border_with)
-        
+
+    def play_sound(self, sound_list, connector):
+        """Spielt eine Sound-Datei ab."""
+        if sound_list:
+            for snd in sound_list:
+                try:
+                    sound = pygame.mixer.Sound("sounds/" + snd["name"])
+                    sound.play()
+                except pygame.error as e:
+                    print(f"Fehler beim Laden der Audiodatei: {e}")
+            connector.delete_sounds(self)
+    
     def draw(self, objects):
         """Zeichnet alle sichtbaren Objekte."""
         self.screen.fill((255, 255, 255))  # Hintergrund schwarz
@@ -63,10 +73,13 @@ class Visualizer:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
-
+    
             # Koordinaten abrufen und Kreis zeichnen
             objects = connection.fetch_objects(self)
             self.draw(objects)
             self.clock.tick(60)  # 60 FPS
+            
+            sounds = connection.fetch_audio(self)
+            self.play_sound(sounds, connection)
 
         pygame.quit()
