@@ -16,16 +16,17 @@ print("Server läuft...")
 class VisualObject(BaseModel):
     id: int
     name: str = "Alex"
-    type: str = "circle" # z.B. "circle" oder "rectangle"
+    type: str = "rectangle" # z.B. "circle" oder "rectangle"
     x: int = 100
     y: int = 100
     color: str = "blue"
-    scale_x: int = "20"
-    scale_y: int = "20"
+    scale_x: int = "100"
+    scale_y: int = "200"
     border_width: int = "5"
     visible: bool
     lines_points: List[Tuple[int, int]] = [[0, 0], [1, 1]]
     text: Optional[str] = ""
+    rotation: int = 0
 
 class Sounds(BaseModel):
     id: int
@@ -56,7 +57,8 @@ def dict(self):
         "border_width": self.border_width,
         "visible": self.visible,
         "lines_points": self.lines_points,
-        "text": self.text
+        "text": self.text,
+        "rotation": self.rotation
     }
 
 @classmethod
@@ -75,7 +77,8 @@ def from_dict(cls, data):
             border_width=data["border_width"],
             visible=data["visible"],
             lines_points=data["lines_points"],
-            text=data["text"]
+            text=data["text"],
+            rotation=data["rotation"]
         )
     except KeyError as e:
         print(f"Fehlender Key: {e}")
@@ -132,6 +135,7 @@ def update_object(object_id: int, coords: VisualObject):
             obj.visible = coords.visible
             obj.lines_points = coords.lines_points
             obj.text = coords.text
+            obj.rotation = coords.rotation
             print(f"Updated object {obj.id}: {obj}")
 
     save_objects(objects)
@@ -175,7 +179,7 @@ def get_objects():
 def create_object(obj: VisualObject):
     """Ein neues Objekt erstellen."""
     new_id = len(objects) + 1  # Automatische ID-Zuweisung
-    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, border_width=obj.border_width, visible=obj.visible, lines_points=obj.lines_points, text=obj.text)
+    new_object = VisualObject(id=new_id, name=obj.name, type=obj.type, x=obj.x, y=obj.y, color=obj.color, scale_x=obj.scale_x, scale_y=obj.scale_y, border_width=obj.border_width, visible=obj.visible, lines_points=obj.lines_points, text=obj.text, rotation=obj.rotation)
     objects.append(new_object)
     save_objects(objects)
     return {"message": "Objekt hinzugefügt", "object": new_object}

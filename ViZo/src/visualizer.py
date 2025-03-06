@@ -45,7 +45,19 @@ class Visualizer:
                 except pygame.error as e:
                     print(f"Fehler beim Laden der Audiodatei: {e}")
             connector.delete_sounds(self)
+
+    def draw_rotated_rectangle(self, obj):
+        """Zeichnet ein Rechteck mit Rotation."""
+        rotation_angle = obj.get("rotation", 0)  # Standardwert: 0° Rotation
     
+        rect_surface = pygame.Surface((obj["scale_x"], obj["scale_y"]), pygame.SRCALPHA)
+        pygame.draw.rect(rect_surface, obj["color"], (0, 0, obj["scale_x"], obj["scale_y"]), obj["border_width"])
+        
+        rotated_surface = pygame.transform.rotate(rect_surface, rotation_angle)   
+        rotated_rect = rotated_surface.get_rect(center=(obj["x"], obj["y"]))
+    
+        self.screen.blit(rotated_surface, rotated_rect)
+
     def draw(self, objects):
         """Zeichnet alle sichtbaren Objekte."""
         self.screen.fill((255, 255, 255))  # Hintergrund schwarz
@@ -54,7 +66,7 @@ class Visualizer:
             if obj["type"] == "circle":
                 pygame.draw.circle(self.screen, obj["color"], ((obj["x"]), (obj["y"])), obj["scale_x"]/2, obj["border_width"])
             elif obj["type"] == "rectangle":
-                pygame.draw.rect(self.screen, obj["color"], ((obj["x"] - obj["scale_x"]/2), (obj["y"] - obj["scale_y"]/2), obj["scale_x"], obj["scale_y"]), obj["border_width"])
+                self.draw_rotated_rectangle(obj)
             elif obj["type"] == "lines":
                 pygame.draw.lines(self.screen, obj["color"], False, obj["lines_points"], obj["border_width"])
             elif obj["type"] == "text":
