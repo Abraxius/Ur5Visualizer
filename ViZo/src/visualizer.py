@@ -64,11 +64,42 @@ class Visualizer:
             elif obj["type"] == "crosshair":
                 self.draw_crosshair(self.screen, obj["color"], obj["x"], obj["y"], obj["scale_x"], obj["border_width"])
                 
-    
         pygame.display.flip()
+    
+    def credits(self):
+        BLACK = (0, 0, 0)
+        WHITE = (255, 255, 255)
+
+        # Aktuelle Fenstergröße abrufen
+        screen_width = self.screen.get_width()
+        screen_height = self.screen.get_height()
+        
+        # Text rendern
+        title_text = self.font.render("ViZo", True, WHITE)
+        version_text = self.font.render("Version 1.0", True, WHITE)
+        author_text = self.font.render("by Alexander Jost", True, WHITE)
+        
+        # Positionen berechnen
+        title_rect = title_text.get_rect(center=(screen_width / 2, screen_height / 3))
+        version_rect = version_text.get_rect(center=(screen_width / 2, screen_height / 2))
+        author_rect = author_text.get_rect(center=(screen_width / 2, screen_height * 2 / 3))
+        
+        # Startscreen anzeigen
+        self.screen.fill(BLACK)
+        self.screen.blit(title_text, title_rect)
+        self.screen.blit(version_text, version_rect)
+        self.screen.blit(author_text, author_rect)
+        pygame.display.flip()
+        
+        # Kurze Wartezeit für den Startscreen
+        pygame.time.delay(3000)  
+        return 0
     
     def run(self, connection):
         """Startet die Visualisierungsschleife."""
+        
+        self.credits()
+        
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
