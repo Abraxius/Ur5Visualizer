@@ -21,7 +21,7 @@ class VisualObject(BaseModel):
     y: int = 100
     color: str = "blue"
     scale_x: int = "100"
-    scale_y: int = "200"
+    scale_y: int = "100"
     border_width: int = "5"
     visible: bool
     lines_points: List[Tuple[int, int]] = [[0, 0], [1, 1]]

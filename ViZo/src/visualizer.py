@@ -1,5 +1,6 @@
 ﻿import pygame
 import requests
+import os
 
 # Farben
 transparent_color = (255, 255, 255)
@@ -58,6 +59,28 @@ class Visualizer:
     
         self.screen.blit(rotated_surface, rotated_rect)
 
+
+
+    def draw_image(self, obj):
+        """Lädt ein Bild aus dem /images Ordner und zeigt es an der angegebenen Position."""
+        try:
+            image_path = os.path.join("images", obj["name"])
+    
+            # Bild nur einmal laden und zwischenspeichern
+            if "image_surface" not in obj:
+                obj["image_surface"] = pygame.image.load(image_path).convert_alpha()
+    
+            image_surface = obj["image_surface"]
+            image_surface = pygame.transform.scale(image_surface, (obj["scale_x"], obj["scale_y"]))
+            image_surface = pygame.transform.rotate(image_surface, obj["rotation"])
+    
+            image_rect = image_surface.get_rect(center=(obj["x"], obj["y"]))
+            self.screen.blit(image_surface, image_rect)
+    
+        except pygame.error as e:
+            print(f"Fehler beim Laden des Bildes {obj['image_name']}: {e}")
+
+
     def draw(self, objects):
         """Zeichnet alle sichtbaren Objekte."""
         self.screen.fill((255, 255, 255))  # Hintergrund schwarz
@@ -75,6 +98,8 @@ class Visualizer:
                 self.screen.blit(text_surface, text_rect)
             elif obj["type"] == "crosshair":
                 self.draw_crosshair(self.screen, obj["color"], obj["x"], obj["y"], obj["scale_x"], obj["border_width"])
+            elif obj["type"] == "image":
+                self.draw_image(obj)
                 
         pygame.display.flip()
     

@@ -38,11 +38,6 @@ build/
 instance/
 *.sqlite3
 
-# PyGame Screenshots (optional, falls du Screenshots speicherst)
-*.png
-*.jpg
-*.jpeg
-
 # Anforderungen-Dateien, wenn sie automatisch generiert werden
 Pipfile.lock
 poetry.lock

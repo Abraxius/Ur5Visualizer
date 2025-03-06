@@ -1,13 +1,13 @@
 [
     {
         "id": 1,
-        "name": "Alex",
-        "type": "rectangle",
-        "x": 0,
-        "y": 0,
+        "name": "sample_image.png",
+        "type": "image",
+        "x": 200,
+        "y": 200,
         "color": "blue",
-        "scale_x": 100,
-        "scale_y": 100,
+        "scale_x": 200,
+        "scale_y": 200,
         "border_width": 5,
         "visible": true,
         "lines_points": [
@@ -21,6 +21,6 @@
             ]
         ],
         "text": "",
-        "rotation": 45
+        "rotation": 0
     }
 ]
