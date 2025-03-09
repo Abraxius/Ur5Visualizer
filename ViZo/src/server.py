@@ -39,6 +39,21 @@ class Sounds(BaseModel):
 #    VisualObject(id="3-green", type="circle", x=300, y=300, color="green", scale_x=20, scale_y=20, visible=True)
 #]
 
+#VisualObject(
+#    id="1", 
+#    name="Text",
+#    type="text",
+#    x=50,
+#    y=100,
+#    scale_x=50,
+#    scale_y=40,
+#    border_width=5,
+#    visible=True,
+#    line_points=[[0,0], [1,1], [2,2]],
+#    text="Hello world",
+#    rotation=45,
+#)
+
 #Sound-Speicher
 sounds = []
 

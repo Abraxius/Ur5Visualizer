@@ -83,7 +83,7 @@ class Visualizer:
 
     def draw(self, objects):
         """Zeichnet alle sichtbaren Objekte."""
-        self.screen.fill((255, 255, 255))  # Hintergrund schwarz
+        self.screen.fill((255, 255, 255))  
 
         for obj in objects:
             if obj["type"] == "circle":
@@ -143,11 +143,11 @@ class Visualizer:
                     self.running = False
     
             # Koordinaten abrufen und Kreis zeichnen
-            objects = connection.fetch_objects(self)
+            objects = connection.objects
             self.draw(objects)
             self.clock.tick(60)  # 60 FPS
             
-            sounds = connection.fetch_audio(self)
+            sounds = connection.sounds
             self.play_sound(sounds, connection)
 
         pygame.quit()
