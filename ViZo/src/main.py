@@ -15,6 +15,18 @@ class Connector:
         threading.Thread(target=self.update_objects, daemon=True).start()
         threading.Thread(target=self.update_sounds, daemon=True).start()
 
+    def update_objects(self):
+        """Hintergrund-Thread: Objekte"""
+        while self.running:
+            self.fetch_objects()
+            time.sleep(0.1)  
+
+    def update_sounds(self):
+        """Hintergrund-Thread: Sound"""
+        while self.running:
+            self.fetch_audio()
+            time.sleep(0.1)  
+            
     def fetch_objects(self):
         """API-Request senden und Objekte abrufen"""
         try:
@@ -32,17 +44,7 @@ class Connector:
         except requests.RequestException as e:
             print(f"Fehler beim Abrufen der Soundnamen: {e}")
 
-    def update_objects(self):
-        """Hintergrund-Thread: Lädt kontinuierlich neue Objektdaten."""
-        while self.running:
-            self.fetch_objects()
-            time.sleep(0.1)  # API-Abfrage alle 100ms (verhindert Überlastung)
 
-    def update_sounds(self):
-        """Hintergrund-Thread: Lädt kontinuierlich neue Sounddaten."""
-        while self.running:
-            self.fetch_audio()
-            time.sleep(0.1)  # API-Abfrage alle 100ms
 
     def delete_sounds(self):
         """Sendet einen DELETE-Request, um abgespielte Sounds zu entfernen."""
@@ -55,5 +57,5 @@ class Connector:
             return None
 
 if __name__ == "__main__":
-    visualizer = Visualizer(fullScreen=False)
+    visualizer = Visualizer(fullScreen=True)
     visualizer.run(Connector())

@@ -45,7 +45,7 @@ class Visualizer:
                     sound.play()
                 except pygame.error as e:
                     print(f"Fehler beim Laden der Audiodatei: {e}")
-            connector.delete_sounds(self)
+            connector.delete_sounds()
 
     def draw_rotated_rectangle(self, obj):
         """Zeichnet ein Rechteck mit Rotation."""

@@ -2,25 +2,33 @@
     {
         "id": 1,
         "name": "sample_image.png",
-        "type": "image",
-        "x": 200,
-        "y": 200,
+        "type": "rectangle",
+        "x": 1000,
+        "y": 400,
         "color": "blue",
         "scale_x": 200,
         "scale_y": 200,
-        "border_width": 5,
+        "border_width": 0,
         "visible": true,
         "lines_points": [
             [
-                0,
-                0
+                400,
+                400
             ],
             [
-                1,
-                1
+                600,
+                200
+            ],
+            [
+                700,
+                300
+            ],
+            [
+                1920,
+                1080
             ]
         ],
-        "text": "",
+        "text": "Hallo, Roboter",
         "rotation": 0
     }
 ]
