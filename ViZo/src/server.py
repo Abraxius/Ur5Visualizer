@@ -175,18 +175,21 @@ def get_object(object_id: int):
             return obj
     return {"error": "Objekt nicht gefunden"}
 
-@app.get("/objects/{object_id}", response_model=VisualObject)
-def get_object(object_id: int):
-    """Ein bestimmtes Objekt anhand der ID abrufen."""
-    for obj in objects:
-        if obj.id == object_id:
-            return obj
-    return {"error": "Objekt nicht gefunden"}
 
 @app.get("/objects", response_model=List[VisualObject])
 def get_objects():
     """Alle gespeicherten Objekte abrufen."""
     return objects
+
+@app.delete("/objects/{object_id}")
+def delete_object(object_id: int, coords: VisualObject):
+    for obj in objects:
+        if obj.id == object_id:
+            objects.remove(obj)
+            print(f"Objekt wurde gelöscht")
+    
+    save_objects(objects)
+    return {"message": "Alle Sounds gelöscht"}
 
 #crud interface
 
@@ -217,12 +220,3 @@ def delete_sound():
     sounds.clear()
     return {"message": "Alle Sounds gelöscht"}
 
-# ToDo: Funktioniert noch nicht richtig, ist aktuell allerdings auch unnötig, deshalb auskommentiert
-#@app.delete("/sounds/{sound_name}")
-#def delete_sound(sound_name: str):
-#    """Hier werden die Sounds aus der Liste gelöscht, damit sie nicht endlos abspielen."""
-#    for snd in sounds:
-#        if snd.name == sound_name:
-#            sounds.remove(sound_name)
-#            return {"message": "Der Sound wurde gelöscht"}
-#    return {"message": "Der Sound wurde nicht gefunden"}

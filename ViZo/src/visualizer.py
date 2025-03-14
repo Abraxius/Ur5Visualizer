@@ -41,9 +41,15 @@ class Visualizer:
         if sound_list:
             for snd in sound_list:
                 try:
-                    sound = pygame.mixer.Sound("sounds/" + snd["name"])
+                    sound_path = os.path.join("sounds", snd["name"])
+
+                    if not os.path.exists(sound_path):
+                        print(f"Fehler: Audiodatei '{sound_path}' nicht gefunden.")
+                        continue  # Nächste Datei prüfen
+
+                    sound = pygame.mixer.Sound(sound_path)
                     sound.play()
-                except pygame.error as e:
+                except Exception as e:
                     print(f"Fehler beim Laden der Audiodatei: {e}")
             connector.delete_sounds()
 
@@ -65,7 +71,12 @@ class Visualizer:
         """Lädt ein Bild aus dem /images Ordner und zeigt es an der angegebenen Position."""
         try:
             image_path = os.path.join("images", obj["name"])
-    
+
+            # Überprüfen, ob die Datei existiert
+            if not os.path.exists(image_path):
+                print(f"Fehler: Bilddatei '{image_path}' nicht gefunden. Bild wird nicht geladen.")
+                return  # Beende die Funktion
+            
             # Bild nur einmal laden und zwischenspeichern
             if "image_surface" not in obj:
                 obj["image_surface"] = pygame.image.load(image_path).convert_alpha()
@@ -77,8 +88,9 @@ class Visualizer:
             image_rect = image_surface.get_rect(center=(obj["x"], obj["y"]))
             self.screen.blit(image_surface, image_rect)
     
-        except pygame.error as e:
+        except Exception as e:
             print(f"Fehler beim Laden des Bildes {obj['image_name']}: {e}")
+            return
 
 
     def draw(self, objects):
@@ -100,6 +112,8 @@ class Visualizer:
                 self.draw_crosshair(self.screen, obj["color"], obj["x"], obj["y"], obj["scale_x"], obj["border_width"])
             elif obj["type"] == "image":
                 self.draw_image(obj)
+            else:
+                print("type is not known")
                 
         pygame.display.flip()
     

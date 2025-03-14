@@ -30,5 +30,29 @@
         ],
         "text": "Hallo, Roboter",
         "rotation": 0
+    },
+    {
+        "id": 2,
+        "name": "sample_image.png",
+        "type": "image",
+        "x": 100,
+        "y": 100,
+        "color": "blue",
+        "scale_x": 100,
+        "scale_y": 100,
+        "border_width": 5,
+        "visible": true,
+        "lines_points": [
+            [
+                0,
+                0
+            ],
+            [
+                1,
+                1
+            ]
+        ],
+        "text": "",
+        "rotation": 0
     }
 ]
