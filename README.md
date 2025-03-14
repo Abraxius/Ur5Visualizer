@@ -9,10 +9,12 @@ This file contains the required packages
 
 The server is started with this command
 ---
+'''
 .\venv\Scripts\Activate
 cd .\ViZo\
 cd .\src\
 uvicorn server:app --host 0.0.0.0 --port 8000 --reload
+'''
 ---
 
 # Visualizer.py
