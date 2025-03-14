@@ -26,6 +26,7 @@ cd .\src\
 python main.py
 ```
 
-# These are the attributes that are expected from the individual objects
+# Objects attributes
 
+These are the attributes that are expected from the individual objects
 ![image](https://github.com/user-attachments/assets/810bb1c2-77ce-4c1d-be99-5c454924a7b8)
