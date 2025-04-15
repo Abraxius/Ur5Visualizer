@@ -1,6 +1,7 @@
 # ViZo
 Overview
 A program which visualizes movements, working areas and similar of a UR5 control. This is part of the research project at the HS Fulda.
+
 The system provides visual and acoustic feedback by projecting information directly onto the work surface and playing audio signals when required. The information is displayed via a projector. It consists of:
 
 - A FastAPI server that manages objects and sounds via a REST API
